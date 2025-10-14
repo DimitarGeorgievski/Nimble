@@ -1,0 +1,94 @@
+3️⃣ shifts
+
+id → uuid, primary key
+
+user_id → uuid, FK → users
+
+business_location_id → uuid, FK → business_locations
+
+start_time → timestamp
+
+end_time → timestamp, nullable
+
+role → string / enum (за која улога е смената, ако корисникот има multi-role)
+
+Notes: Смените на персоналот, може да се користат за analytics и присуство.
+
+4️⃣ inventory_stock
+
+id → uuid, primary key
+
+business_location_id → uuid, FK → business_locations
+
+item_name → string
+
+quantity → numeric / decimal
+
+unit → string (e.g., kg, liter, pcs)
+
+min_threshold → numeric / decimal (за alert)
+
+created_at → timestamp
+
+updated_at → timestamp
+
+
+5️⃣ reservations
+
+id → uuid, primary key
+
+table_id → uuid, FK → tables
+
+customer_name → string
+
+customer_phone → string, nullable
+
+reservation_time → timestamp
+
+guest_count → integer
+
+status → string / enum (e.g., CONFIRMED, CANCELLED, COMPLETED)
+
+created_at → timestamp
+
+updated_at → timestamp
+
+6️⃣ suppliers
+
+id → uuid, primary key
+
+name → string
+
+email → string, nullable
+
+phone_number → string, nullable
+
+address → string, nullable
+
+created_at → timestamp
+
+updated_at → timestamp
+
+7️⃣ menu_items
+
+id → uuid
+
+name → string
+
+description → text, nullable
+
+price → numeric / decimal
+
+category_id → uuid, FK → menu_categories
+
+tax_fee_id → uuid, FK → tax_rules, nullable
+
+service_fee_id → uuid, FK → service_fee_rules, nullable
+
+is_active → boolean, default true
+
+created_at → timestamp
+
+updated_at → timestamp
+
+// dodaj vo order_items relacija so menu_items
