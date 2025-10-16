@@ -13,6 +13,11 @@ import { TaxesModule } from './taxes/taxes.module';
 import { ServiceFeeModule } from './service-fee/service-fee.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItemsModule } from './order_items/order_items.module';
+import { MenuItemsModule } from './menu-items/menu-items.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
+import { ReservationsModule } from './reservations/reservations.module';
+import { InventoryStockModule } from './inventory-stock/inventory-stock.module';
+import { ShiftsModule } from './shifts/shifts.module';
 
 @Module({
   imports: [
@@ -31,6 +36,11 @@ import { OrderItemsModule } from './order_items/order_items.module';
     ServiceFeeModule,
     OrdersModule,
     OrderItemsModule,
+    MenuItemsModule,
+    SuppliersModule,
+    ReservationsModule,
+    InventoryStockModule,
+    ShiftsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

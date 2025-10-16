@@ -10,6 +10,7 @@ import { serviceFeeType } from '../enums/service-fee.enum';
 import { MenuCategory } from 'src/menu-categories/entities/menu-category.entity';
 import { Business } from 'src/business/entities/business.entity';
 import { OrderItem } from 'src/order_items/entities/order_item.entity';
+import { MenuItem } from 'src/menu-items/entities/menu-item.entity';
 
 @Entity({
   name: 'servie_fee',
@@ -37,6 +38,8 @@ export class ServiceFee {
   menuCategory: MenuCategory[];
   @OneToMany(() => Business, (buisness) => buisness.serviceFeeId)
   buisness: Business[];
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.serviceFee)
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.serviceFeeId)
   orderItem: OrderItem[];
+  @OneToMany(() => MenuItem, (item) => item.categoryId)
+  menuItem: MenuItem[];
 }

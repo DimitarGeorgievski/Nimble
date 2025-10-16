@@ -9,6 +9,7 @@ import {
 import { status } from '../enums/table.enum';
 import { BusinessLocation } from 'src/business-locations/entities/business-location.entity';
 import { Order } from 'src/orders/entities/order.entity';
+import { Reservation } from 'src/reservations/entities/reservation.entity';
 
 @Entity()
 export class Table {
@@ -26,7 +27,11 @@ export class Table {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'business_location_id' })
-  businessLocation: BusinessLocation;
-  @OneToMany(() => Order, order => order.table)
+  businessLocationId: BusinessLocation;
+  @OneToMany(() => Order, order => order.tableId)
   order: Order[]
+  @OneToMany(() => Reservation, (reservation) => reservation.tableId, {
+    onDelete: 'CASCADE',
+  })
+  reservation: Reservation[];
 }

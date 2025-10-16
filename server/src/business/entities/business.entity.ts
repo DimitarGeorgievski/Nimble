@@ -28,7 +28,7 @@ export class Business {
   })
   updatedAt: Date;
   @OneToMany(() => BusinessLocation, (location) => location.address)
-  buisnessAdress: BusinessLocation[];
+  businessAddress: BusinessLocation[];
   @OneToMany(() => MenuCategory, category => category.buisnessId)
   categories: MenuCategory[];
   @ManyToOne(() => Tax, tax => tax.business)

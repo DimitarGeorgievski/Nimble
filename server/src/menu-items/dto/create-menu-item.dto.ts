@@ -1,39 +1,35 @@
 import {
   IsArray,
   IsBoolean,
-  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
   IsUUID,
 } from 'class-validator';
-import { taxType } from '../enums/tax.enum';
 
-export class CreateTaxDto {
+export class CreateMenuItemDto {
   @IsString()
   name: string;
-  @IsEnum(taxType)
-  type: taxType;
+  @IsString()
+  description: string;
   @IsNumber()
-  percent: number;
-  @IsNumber()
-  fixedAmount: number;
+  price: number;
   @IsBoolean()
-  isDefault: boolean;
+  isActive: boolean;
+  @IsOptional()
+  @IsUUID('4', { each: true })
+  categoryId?: string;
+  @IsOptional()
+  @IsUUID('4', { each: true })
+  taxFeeId?: string;
+  @IsOptional()
+  @IsUUID('4', { each: true })
+  serviceFeeId?: string;
+  @IsOptional()
+  @IsUUID('4', { each: true })
+  businessLocationId?: string;
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  menuCategory?: string[];
-  @IsOptional()
-  @IsArray()
-  @IsUUID('4', { each: true })
-  business?: string[];
-  @IsOptional()
-  @IsArray()
-  @IsUUID('4', { each: true })
-  orderItem?: string[];
-  @IsOptional()
-  @IsArray()
-  @IsUUID('4', { each: true })
-  menuItem?: string[];
+  order?: string;
 }

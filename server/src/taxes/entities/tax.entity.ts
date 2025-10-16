@@ -10,6 +10,7 @@ import {
 import { taxType } from '../enums/tax.enum';
 import { Business } from 'src/business/entities/business.entity';
 import { OrderItem } from 'src/order_items/entities/order_item.entity';
+import { MenuItem } from 'src/menu-items/entities/menu-item.entity';
 
 @Entity()
 export class Tax {
@@ -17,9 +18,9 @@ export class Tax {
   id: string;
   @Column()
   name: string;
-  @Column({ enum: taxType})
+  @Column({ enum: taxType })
   type: taxType;
-  @Column({nullable: true})
+  @Column({ nullable: true })
   percent: number;
   @Column({ name: 'fixed_amount', nullable: true })
   fixedAmount: number;
@@ -31,8 +32,10 @@ export class Tax {
   updatedAt: Date;
   @OneToMany(() => MenuCategory, (category) => category.taxId)
   menuCategory: MenuCategory[];
-  @OneToMany(() => Business, buisness => buisness.taxId)
-  business: Business[]
-  @OneToMany(() => OrderItem, orderItem => orderItem.tax)
-  orderItem: OrderItem[]
+  @OneToMany(() => Business, (buisness) => buisness.taxId)
+  business: Business[];
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.taxId)
+  orderItem: OrderItem[];
+  @OneToMany(() => MenuItem, (item) => item.categoryId)
+  menuItem: MenuItem[];
 }

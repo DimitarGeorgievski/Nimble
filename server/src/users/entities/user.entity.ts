@@ -11,6 +11,7 @@ import {
 import { userStatus } from '../enum/user.enum';
 import { Role } from 'src/roles/entities/role.entity';
 import { Order } from 'src/orders/entities/order.entity';
+import { Shift } from 'src/shifts/entities/shift.entity';
 
 @Entity()
 export class User {
@@ -65,6 +66,8 @@ export class User {
     inverseJoinColumn: { name: 'role_id', referencedColumnName: 'id' },
   })
   roles: Role[];
-  @OneToMany(() => Order, (order) => order.user)
+  @OneToMany(() => Order, (order) => order.userId)
   order: Order[];
+  @OneToMany(() => Shift, (shift) => shift.userId)
+  shift: Shift[];
 }

@@ -1,7 +1,8 @@
 import { Business } from 'src/business/entities/business.entity';
+import { MenuItem } from 'src/menu-items/entities/menu-item.entity';
 import { ServiceFee } from 'src/service-fee/entities/service-fee.entity';
 import { Tax } from 'src/taxes/entities/tax.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
   name: 'menu_categories',
@@ -23,7 +24,9 @@ export class MenuCategory {
   serviceFeeId: ServiceFee;
   @ManyToOne(() => Business, buisness => buisness.categories)
   @JoinColumn({
-    name: "buisness_id",
+    name: "business_id",
   })
   buisnessId: Business;
+  @OneToMany(() => MenuItem, item => item.categoryId)
+  menuItem: MenuItem[];
 }

@@ -24,13 +24,13 @@ export class Order {
   updatedAt: Date;
   @ManyToOne(() => Table, table => table.order, {onDelete: "CASCADE"})
   @JoinColumn({name: "table_id"})
-  table: Table
+  tableId: Table
   @ManyToOne(() => BusinessLocation, businessLocation => businessLocation.order, {onDelete: "CASCADE"})
   @JoinColumn({name: "business_location_id"})
-  businessLocation: BusinessLocation
+  businessLocationId: BusinessLocation
   @ManyToOne(() => User, user => user.order, {onDelete: "CASCADE"})
   @JoinColumn({name: "user_id"})
-  user: User;
-  @OneToMany(() => OrderItem, orderItem => orderItem.order)
+  userId: User;
+  @OneToMany(() => OrderItem, orderItem => orderItem.orderId)
   orderItem: OrderItem[];
 }
