@@ -1,26 +1,87 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+import { DuplicateCodes } from 'src/duplicateCodes';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(@InjectRepository(User) private usersRepo: Repository<User>) {}
+  async create(createData: CreateUserDto) {
+    try {
+      const foundUser = await this.findOneByEmail(createData.email);
+      if (foundUser)
+        throw new BadRequestException('User with this email already exists');
+      const newUser = await this.usersRepo.save({
+        ...createData,
+        roles: createData.roles?.map((id) => ({ id })),
+        shift: createData.shift?.map((id) => ({ id })),
+        order: createData.order?.map((id) => ({ id })),
+      });
+      return newUser;
+    } catch (error) {
+      if (error.code === DuplicateCodes.DUPLICATE_PG_CODE)
+        throw new BadRequestException(
+          'User with these informations already exist',
+        );
+      throw new InternalServerErrorException(error.messsage);
+    }
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.usersRepo.find({
+      relations: {
+        roles: true,
+        shift: true,
+      },
+    });
+  }
+  async findOneByEmail(email: string) {
+    return this.usersRepo.findOneBy({ email });
+  }
+  async findOne(id: string) {
+    try {
+      const foundUser = await this.usersRepo.findOneByOrFail({ id });
+      return foundUser;
+    } catch (error) {
+      throw new NotFoundException('User not found');
+    }
+  }
+  async findUserOrders(id: string) {
+    return await this.usersRepo.find({
+      where: { id },
+      relations: {
+        order: true,
+      },
+    });
+  }
+  async update(id: string, data: UpdateUserDto) {
+    try {
+      const foundUser = await this.findOne(id);
+      Object.assign(foundUser, data);
+      await this.usersRepo.save({
+        ...data,
+        roles: data.roles?.map((id) => ({ id })),
+        shift: data.shift?.map((id) => ({ id })),
+        order: data.order?.map((id) => ({ id })),
+      });
+    } catch (error) {
+      if (error.code === DuplicateCodes.DUPLICATE_PG_CODE)
+        throw new BadRequestException('Got Issue with updating this user');
+      throw new InternalServerErrorException(error.messsage);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const foundUser = await this.findOne(id);
+    if (!foundUser) throw new NotFoundException('User not Found');
+    return this.usersRepo.remove(foundUser);
   }
 }

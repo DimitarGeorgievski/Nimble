@@ -19,16 +19,21 @@ export class SuppliersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.suppliersService.findOne(+id);
+    return this.suppliersService.findOne(id);
+  }
+
+  @Get('/email/:email')
+  findOneByEmail(@Param('email') email: string) {
+    return this.suppliersService.findOneByEmail(email);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSupplierDto: UpdateSupplierDto) {
-    return this.suppliersService.update(+id, updateSupplierDto);
+    return this.suppliersService.update(id, updateSupplierDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.suppliersService.remove(+id);
+    return this.suppliersService.remove(id);
   }
 }

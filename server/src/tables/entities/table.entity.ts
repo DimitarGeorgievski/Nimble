@@ -15,9 +15,7 @@ import { Reservation } from 'src/reservations/entities/reservation.entity';
 export class Table {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column({
-    unique: true,
-  })
+  @Column()
   number: number;
   @Column()
   zone: string;

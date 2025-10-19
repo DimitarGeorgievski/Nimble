@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateShiftDto } from './dto/create-shift.dto';
 import { UpdateShiftDto } from './dto/update-shift.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Shift } from './entities/shift.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ShiftsService {
+  constructor(@InjectRepository(Shift) private shiftRepo: Repository<Shift>){}
   create(createShiftDto: CreateShiftDto) {
-    return 'This action adds a new shift';
+    
   }
 
   findAll() {

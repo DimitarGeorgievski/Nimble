@@ -16,19 +16,33 @@ export class TablesController {
   findAll() {
     return this.tablesService.findAll();
   }
+  
+  @Get('/orders')
+  findAllTableOrders() {
+    return this.tablesService.findAllTableOrders();
+  }
 
+  @Get('/reservations')
+  findAllTableReservations() {
+    return this.tablesService.findAllTableReservations();
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.tablesService.findOne(+id);
+    return this.tablesService.findOne(id);
   }
+  @Get('/number/:number')
+  findOneByNumber(@Param('number') number: number) {
+    return this.tablesService.findOneByNumber(number);
+  }
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTableDto: UpdateTableDto) {
-    return this.tablesService.update(+id, updateTableDto);
+    return this.tablesService.update(id, updateTableDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tablesService.remove(+id);
+  @Delete(':number')
+  remove(@Param('number') number: number) {
+    return this.tablesService.remove(number);
   }
 }

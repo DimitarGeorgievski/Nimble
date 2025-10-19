@@ -13,7 +13,7 @@ export class Supplier {
   @Column()
   name: string;
   @Column({
-    nullable: true,
+    unique: true,
   })
   email: string;
   @Column({ name: 'phone_number', nullable: true })

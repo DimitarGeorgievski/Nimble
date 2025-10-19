@@ -30,13 +30,11 @@ export class User {
   @Column({
     length: 150,
     unique: true,
-    nullable: true,
   })
   email: string;
   @Column({
     length: 20,
     unique: true,
-    nullable: false,
     name: 'phone_number',
   })
   phoneNumber: string;

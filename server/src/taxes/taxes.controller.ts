@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TaxesService } from './taxes.service';
 import { CreateTaxDto } from './dto/create-tax.dto';
 import { UpdateTaxDto } from './dto/update-tax.dto';
@@ -19,16 +27,31 @@ export class TaxesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.taxesService.findOne(+id);
+    return this.taxesService.findOne(id);
+  }
+  
+  @Get('/name/:id')
+  findTaxByName(@Param('id') id: string) {
+    return this.taxesService.findTaxByName(id);
+  }
+
+  @Get('/orderItems/:id')
+  findTaxOrderItems(@Param('id') id: string) {
+    return this.taxesService.findTaxOrderItems(id);
+  }
+
+  @Get('/menuItems/:id')
+  findTaxMenuItems(@Param('id') id: string) {
+    return this.taxesService.findTaxMenuItems(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTaxDto: UpdateTaxDto) {
-    return this.taxesService.update(+id, updateTaxDto);
+    return this.taxesService.update(id, updateTaxDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.taxesService.remove(+id);
+    return this.taxesService.remove(id);
   }
 }
