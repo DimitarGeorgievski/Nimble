@@ -8,27 +8,42 @@ export class ServiceFeeController {
   constructor(private readonly serviceFeeService: ServiceFeeService) {}
 
   @Post()
-  create(@Body() createServiceFeeDto: CreateServiceFeeDto) {
-    return this.serviceFeeService.create(createServiceFeeDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.serviceFeeService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.serviceFeeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceFeeDto: UpdateServiceFeeDto) {
-    return this.serviceFeeService.update(+id, updateServiceFeeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.serviceFeeService.remove(+id);
-  }
+    create(@Body() createTaxDto: CreateServiceFeeDto) {
+      return this.serviceFeeService.create(createTaxDto);
+    }
+  
+    @Get()
+    findAll() {
+      return this.serviceFeeService.findAll();
+    }
+  
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+      return this.serviceFeeService.findOne(id);
+    }
+    
+    @Get('/name/:id')
+    findServiceByName(@Param('id') id: string) {
+      return this.serviceFeeService.findServiceByName(id);
+    }
+  
+    @Get('/orderItems/:id')
+    findServiceOrderItems(@Param('id') id: string) {
+      return this.serviceFeeService.findServiceOrderItems(id);
+    }
+  
+    @Get('/menuItems/:id')
+    findServiceMenuItems(@Param('id') id: string) {
+      return this.serviceFeeService.findServiceMenuItems(id);
+    }
+  
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateTaxDto: UpdateServiceFeeDto) {
+      return this.serviceFeeService.update(id, updateTaxDto);
+    }
+  
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+      return this.serviceFeeService.remove(id);
+    }
 }

@@ -16,19 +16,24 @@ export class ReservationsController {
   findAll() {
     return this.reservationsService.findAll();
   }
+  
+  @Get('/name/:name')
+  findOneByName(@Param('name') name: string) {
+    return this.reservationsService.findOneByName(name);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.reservationsService.findOne(+id);
+    return this.reservationsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReservationDto: UpdateReservationDto) {
-    return this.reservationsService.update(+id, updateReservationDto);
+    return this.reservationsService.update(id, updateReservationDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.reservationsService.remove(+id);
+    return this.reservationsService.remove(id);
   }
 }

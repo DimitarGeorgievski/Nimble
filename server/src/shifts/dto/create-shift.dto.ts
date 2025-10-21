@@ -1,7 +1,9 @@
-import { IsEnum, IsISO8601, IsOptional, IsUUID } from 'class-validator';
+import { IsEnum, IsISO8601, IsOptional, IsString, IsUUID } from 'class-validator';
 import { roleShifts } from '../enums/shifts.enum';
 
 export class CreateShiftDto {
+  @IsString()
+  name: string;
   @IsISO8601()
   startTime: Date;
   @IsISO8601()

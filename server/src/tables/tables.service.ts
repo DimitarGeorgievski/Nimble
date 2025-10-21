@@ -94,8 +94,7 @@ export class TablesService {
       });
       await this.tableRepo.save(foundTable);
     } catch (error) {
-      console.log(error);
-      if (error.code === DuplicateCodes)
+      if (error.code === DuplicateCodes.DUPLICATE_PG_CODE)
         throw new BadRequestException('Got Issue with updating this table');
 
       throw new InternalServerErrorException(error.messsage);

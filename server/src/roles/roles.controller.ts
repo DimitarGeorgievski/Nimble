@@ -17,18 +17,24 @@ export class RolesController {
     return this.rolesService.findAll();
   }
 
+  @Get('/name/:name')
+  findRoleByName(@Param('name') name: string) {
+    return this.rolesService.findRoleByName(name);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.rolesService.findOne(+id);
+    return this.rolesService.findOne(id);
   }
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
-    return this.rolesService.update(+id, updateRoleDto);
+    return this.rolesService.update(id, updateRoleDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.rolesService.remove(+id);
+    return this.rolesService.remove(id);
   }
 }

@@ -87,7 +87,7 @@ export class TaxesService {
       });
     } catch (error) {
       if (error.code === DuplicateCodes.DUPLICATE_PG_CODE)
-        throw new BadRequestException('Got Issue with updating this user');
+        throw new BadRequestException('Got Issue with updating this Tax');
       throw new InternalServerErrorException(error.messsage);
     }
   }

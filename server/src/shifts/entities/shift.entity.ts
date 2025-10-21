@@ -13,6 +13,8 @@ import { User } from 'src/users/entities/user.entity';
 export class Shift {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+  @Column()
+  name: string
   @Column({ name: 'start_time', type: 'timestamp' })
   startTime: Date;
   @Column({ name: 'end_time', type: 'timestamp', nullable: true })
