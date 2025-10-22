@@ -11,25 +11,25 @@ export class CreateBusinessLocationDto {
   country: string;
   @IsUUID('4')
   @IsOptional()
-  business?: string;
+  businessId?: string;
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  tables?: string;
+  tables?: string[];
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  order?: string;
+  order?: string[];
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  menuItem?: string;
+  menuItem?: string[];
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  inventoryStock?: string;
+  inventoryStock?: string[];
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  shift?: string;
+  shift?: string[];
 }

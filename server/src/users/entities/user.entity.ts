@@ -12,6 +12,7 @@ import { userStatus } from '../enum/user.enum';
 import { Role } from 'src/roles/entities/role.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { Shift } from 'src/shifts/entities/shift.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -68,4 +69,11 @@ export class User {
   order: Order[];
   @OneToMany(() => Shift, (shift) => shift.userId)
   shift: Shift[];
+  @Exclude()
+  @Column('text', {
+    array: true,
+    default: [],
+    nullable: true,
+  })
+  refreshTokens: string[];
 }

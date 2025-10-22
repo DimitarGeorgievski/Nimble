@@ -18,6 +18,7 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { InventoryStockModule } from './inventory-stock/inventory-stock.module';
 import { ShiftsModule } from './shifts/shifts.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { ShiftsModule } from './shifts/shifts.module';
     ReservationsModule,
     InventoryStockModule,
     ShiftsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -84,4 +84,16 @@ export class UsersService {
     if (!foundUser) throw new NotFoundException('User not Found');
     return this.usersRepo.remove(foundUser);
   }
+  async saveRefreshToken(id: string, refreshToken: string) {
+    const foundUser = await this.findOne(id);
+    foundUser.refreshTokens.push(refreshToken);
+    await this.usersRepo.save(foundUser);
+  }
+  async deleteRefreshToken(id: string, refreshToken: string) {
+    const foundUser = await this.findOne(id);
+    foundUser.refreshTokens = foundUser.refreshTokens.filter(
+      (token) => token !== refreshToken,
+    );
+    await this.usersRepo.save(foundUser);
+  }
 }

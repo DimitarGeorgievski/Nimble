@@ -17,18 +17,22 @@ export class InventoryStockController {
     return this.inventoryStockService.findAll();
   }
 
+  @Get('/name/:name')
+  findOneByName(@Param('name') name: string) {
+    return this.inventoryStockService.findOneByName(name);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.inventoryStockService.findOne(+id);
+    return this.inventoryStockService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateInventoryStockDto: UpdateInventoryStockDto) {
-    return this.inventoryStockService.update(+id, updateInventoryStockDto);
+    return this.inventoryStockService.update(id, updateInventoryStockDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.inventoryStockService.remove(+id);
+    return this.inventoryStockService.remove(id);
   }
 }

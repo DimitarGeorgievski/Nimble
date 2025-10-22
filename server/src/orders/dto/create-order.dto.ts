@@ -1,4 +1,4 @@
-import { IsEnum, IsNumber, IsOptional, IsUUID } from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsOptional, IsUUID } from 'class-validator';
 import { orderStatus } from '../enums/order.enum';
 
 export class CreateOrderDto {
@@ -15,7 +15,8 @@ export class CreateOrderDto {
   @IsUUID('4')
   @IsOptional()
   userId?: string;
-  @IsUUID('4')
   @IsOptional()
-  orderItem?: string;
+  @IsArray()
+  @IsUUID('4', { each: true })
+  orderItem?: string[];
 }

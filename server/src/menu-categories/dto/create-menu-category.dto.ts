@@ -15,5 +15,5 @@ export class CreateMenuCategoryDto {
   @IsUUID('4')
   @IsArray()
   @IsOptional()
-  menuItem?: string;
+  menuItem?: string[];
 }

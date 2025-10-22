@@ -31,5 +31,5 @@ export class CreateMenuItemDto {
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  order?: string;
+  order?: string[];
 }

@@ -37,7 +37,7 @@ export class BusinessLocation {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'Business_id' })
-  business: Business;
+  businessId: Business;
   @OneToMany(() => Table, (table) => table.businessLocationId)
   tables: Table[];
   @OneToMany(() => Order, (order) => order.businessLocationId)

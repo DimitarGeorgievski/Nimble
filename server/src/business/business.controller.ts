@@ -17,18 +17,30 @@ export class BusinessController {
     return this.businessService.findAll();
   }
 
+  @Get('/name/:id')
+  findOneByName(@Param('name') name: string) {
+    return this.businessService.findOneByName(name);
+  }
+  @Get('/category/:id')
+  findBusinessCategories(@Param('id') id: string) {
+    return this.businessService.findBusinessCategories(id);
+  }
+  @Get('/address/:id')
+  findBusinessAdress(@Param('id') id: string) {
+    return this.businessService.findBusinessCategories(id);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.businessService.findOne(+id);
+    return this.businessService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBusinessDto: UpdateBusinessDto) {
-    return this.businessService.update(+id, updateBusinessDto);
+    return this.businessService.update(id, updateBusinessDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.businessService.remove(+id);
+    return this.businessService.remove(id);
   }
 }

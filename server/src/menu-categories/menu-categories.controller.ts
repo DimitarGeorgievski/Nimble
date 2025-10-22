@@ -17,18 +17,26 @@ export class MenuCategoriesController {
     return this.menuCategoriesService.findAll();
   }
 
+  @Get('/menu/:id')
+  findCategoryMenuItems(@Param('id') id: string) {
+    return this.menuCategoriesService.findCategoryMenuItems(id);
+  }
+  @Get('/name/:name')
+  findOneByName(@Param('name') name: string) {
+    return this.menuCategoriesService.findOneByName(name);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.menuCategoriesService.findOne(+id);
+    return this.menuCategoriesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateMenuCategoryDto: UpdateMenuCategoryDto) {
-    return this.menuCategoriesService.update(+id, updateMenuCategoryDto);
+    return this.menuCategoriesService.update(id, updateMenuCategoryDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.menuCategoriesService.remove(+id);
+    return this.menuCategoriesService.remove(id);
   }
 }

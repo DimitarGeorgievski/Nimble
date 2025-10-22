@@ -17,18 +17,27 @@ export class MenuItemsController {
     return this.menuItemsService.findAll();
   }
 
+  @Get('/name/:name')
+  findOneByName(@Param('name') name: string) {
+    return this.menuItemsService.findOneByName(name);
+  }
+  @Get('/order/:id')
+  findOneByOrder(@Param('id') id: string) {
+    return this.menuItemsService.findOneByOrder(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.menuItemsService.findOne(+id);
+    return this.menuItemsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateMenuItemDto: UpdateMenuItemDto) {
-    return this.menuItemsService.update(+id, updateMenuItemDto);
+    return this.menuItemsService.update(id, updateMenuItemDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.menuItemsService.remove(+id);
+    return this.menuItemsService.remove(id);
   }
 }
