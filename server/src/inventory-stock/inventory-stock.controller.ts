@@ -1,8 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { InventoryStockService } from './inventory-stock.service';
 import { CreateInventoryStockDto } from './dto/create-inventory-stock.dto';
 import { UpdateInventoryStockDto } from './dto/update-inventory-stock.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { RoleGuard } from 'src/role/role.guard';
+import { Roles } from 'src/role/role.decorator';
+import { RoleType } from 'src/role/roles.model';
 
+@UseGuards(AuthGuard, RoleGuard)
+@Roles(RoleType.ADMIN, RoleType.MANAGER)
 @Controller('inventory-stock')
 export class InventoryStockController {
   constructor(private readonly inventoryStockService: InventoryStockService) {}

@@ -46,6 +46,22 @@ export class UsersService {
   async findOneByEmail(email: string) {
     return this.usersRepo.findOneBy({ email });
   }
+  async findOneByEmailWithRoles(email: string) {
+    return this.usersRepo.findOne({
+      where: { email },
+      relations: {
+        roles: true
+      }
+    });
+  }
+  async findOneWithRoles(id: string) {
+    return this.usersRepo.findOne({
+      where: { id },
+      relations: {
+        roles: true
+      }
+    });
+  }
   async findOne(id: string) {
     try {
       const foundUser = await this.usersRepo.findOneByOrFail({ id });

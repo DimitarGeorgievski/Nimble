@@ -42,7 +42,7 @@ export class User {
   @Column()
   password: string;
   @Column({ default: userStatus.ACTIVE, enum: userStatus })
-  status: userStatus;
+  status?: userStatus;
   @Column({
     default: 'assets/Nimble_logo.png',
     name: 'profile_image_url',

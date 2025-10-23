@@ -26,7 +26,7 @@ export class AuthService {
     await this.usersService.create(userData);
   }
   async loginUser(crednetials: CredentialsDto) {
-    const foundUser = await this.usersService.findOneByEmail(crednetials.email);
+    const foundUser = await this.usersService.findOneByEmailWithRoles(crednetials.email);
     if (!foundUser) throw new UnauthorizedException('invalid credentials');
     const isPasswordValid = await compare(
       crednetials.password,
@@ -34,10 +34,12 @@ export class AuthService {
     );
     if (!isPasswordValid)
       throw new UnauthorizedException('invalid credentials');
+    const roles = foundUser.roles.map(r => r.name);
     const token = await this.jwtService.signAsync({ userId: foundUser.id });
     const refreshToken = await this.jwtService.signAsync(
       {
         userId: foundUser.id,
+        roles
       },
       {
         secret: this.configService.get('REFRESH_TOKEN_SECRET'),

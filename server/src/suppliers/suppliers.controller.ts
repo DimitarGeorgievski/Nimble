@@ -1,27 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SuppliersService } from './suppliers.service';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { RoleGuard } from 'src/role/role.guard';
+import { Roles } from 'src/role/role.decorator';
+import { RoleType } from 'src/role/roles.model';
 
+@UseGuards(AuthGuard,RoleGuard)
+@Roles(RoleType.ADMIN)
 @Controller('suppliers')
 export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
-
+  
   @Post()
   create(@Body() createSupplierDto: CreateSupplierDto) {
     return this.suppliersService.create(createSupplierDto);
   }
-
+  
+  @Roles(RoleType.MANAGER)
   @Get()
   findAll() {
     return this.suppliersService.findAll();
   }
-
+  
+  @Roles(RoleType.MANAGER)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.suppliersService.findOne(id);
   }
-
+  
+  @Roles(RoleType.MANAGER)
   @Get('/email/:email')
   findOneByEmail(@Param('email') email: string) {
     return this.suppliersService.findOneByEmail(email);

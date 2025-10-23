@@ -9,13 +9,13 @@ import { UsersModule } from 'src/users/users.module';
   imports: [
     JwtModule.registerAsync({
       global: true,
-      useFactory(ConfigService: ConfigService){
+      useFactory(configService: ConfigService) {
         return {
-          secret: ConfigService.get('ACCESS_TOKEN_SECRET'),
+          secret: configService.get('ACCESS_TOKEN_SECRET'),
           signOptions: {
-            expiresIn: '5h'
-          }
-        }
+            expiresIn: '40m',
+          },
+        };
       },
       inject: [ConfigService],
     }),
