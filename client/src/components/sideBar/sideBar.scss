@@ -1,0 +1,23 @@
+@import '../../styles/colors.scss';
+.list-wrapper{
+    width: 200px;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    border: 0.5px solid $border-color;
+    border-top: none;
+    list-style: none;
+    .items{
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 2rem;
+        cursor: pointer;
+    }
+    .active{
+        color: $primary-color;
+        border-left: 2px solid $primary-color;
+    }
+}

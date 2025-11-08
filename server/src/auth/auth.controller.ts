@@ -24,7 +24,7 @@ export class AuthController {
       await this.authService.loginUser(credentials);
     res.set('access-token', token);
     res.set('refresh-token', refreshToken);
-    res.json(user);
+    res.json({ user, accessToken: token, refreshToken });
   }
   @HttpCode(204)
   @Post('refresh-token')

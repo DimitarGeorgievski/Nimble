@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .login-wrapper {
   display: flex;
   width: 100%;
@@ -8,17 +10,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(243, 243, 220);
+    background-color: $background-color-colorized;
   }
   .login {
+    display: flex;
+    flex-direction: column;
     width: 50%;
     height: 100%;
+    .error-message{
+      color: $error-color;
+    }
     img {
+      width: 180px;
       margin-left: 5rem;
       padding: 1rem;
     }
     form {
       display: flex;
+      width: 100%;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -33,13 +42,14 @@
         gap: 0.5rem;
         width: 75%;
         label {
-          color: gray;
+          color: $input-label;
         }
         input {
           height: 1rem;
         }
       }
       .input {
+        font-weight: 500;
         display: flex;
         flex-direction: column;
         gap: 0.2rem;
@@ -48,20 +58,24 @@
         a {
           display: flex;
           text-decoration: none;
-          color: rgb(238, 190, 86);
+          color: $primary-color;
           justify-content: flex-end;
         }
         label {
-          color: gray;
+          color: $input-label;
         }
         input {
           height: 2.3rem;
           border-radius: 4px;
           border: 1px solid gray;
+          padding: 0.3rem 0.7rem;
+          font-size: 16px;
+          font-weight: bold;
+          font-family: "Manrope", sans-serif;
         }
         button {
           background-color: rgb(238, 190, 86);
-          color: #fff;
+          color: $background-color;
           border: none;
           border-radius: 4px;
           height: 2.3rem;
@@ -69,8 +83,21 @@
         }
       }
     }
-    img {
-      width: 180px;
+  }
+  @media screen and (max-width: 768px) {
+    .login-wrapper {
+      flex-direction: column;
+    }
+    .animation {
+      display: none;
+    }
+    .login {
+      width: 100%;
+      height: 100vh;
+      align-items: center;
+      img {
+        margin-left: 0;
+      }
     }
   }
 }
