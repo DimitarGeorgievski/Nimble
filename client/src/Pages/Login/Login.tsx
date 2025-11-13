@@ -41,6 +41,7 @@ export function Login() {
       toast.error("There was a error logging, try again");
     }
   };
+  console.log("demek", import.meta.env.VITE_API_URL)
   return (
     <div className="login-wrapper">
       <Helmet>

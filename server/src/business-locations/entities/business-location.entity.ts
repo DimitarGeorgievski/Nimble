@@ -3,6 +3,7 @@ import { InventoryStock } from 'src/inventory-stock/entities/inventory-stock.ent
 import { MenuItem } from 'src/menu-items/entities/menu-item.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { Shift } from 'src/shifts/entities/shift.entity';
+import { Staff } from 'src/staff/entities/staff.entity';
 import { Table } from 'src/tables/entities/table.entity';
 import {
   Column,
@@ -44,6 +45,8 @@ export class BusinessLocation {
   order: Order[];
   @OneToMany(() => MenuItem, (item) => item.categoryId)
   menuItem: MenuItem[];
+  @OneToMany(() => Staff, (staff) => staff.businessLocationId)
+  staff: Staff[];
   @OneToMany(() => InventoryStock, (stock) => stock.businessLocationId)
   inventoryStock: InventoryStock[];
   @OneToMany(() => Shift, (shift) => shift.businessLocationId)

@@ -1,6 +1,7 @@
 import {
   IsArray,
   IsEmail,
+  isEnum,
   IsEnum,
   IsMobilePhone,
   IsOptional,
@@ -28,7 +29,6 @@ export class CreateUserDto {
   profileImageUrl: string;
   @IsOptional()
   @IsArray()
-  @IsUUID('4', { each: true })
   roles?: string[];
   @IsOptional()
   @IsArray()

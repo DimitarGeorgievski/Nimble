@@ -15,11 +15,10 @@ export class AuthGuard implements CanActivate {
       const token = this.extractToken(req);
       if (!token) return false;
       const { userId } = await this.jwtService.verifyAsync(token);
-      const user = await this.usersService.findOneWithRoles(userId);
-      req.user = {
-        ...user,
-        roles: user?.roles.map((r) => r.name),
-      };
+      const user = await this.usersService.findOne(userId);
+      // console.log('user', user);
+      req.user = user;
+      console.log('request user', req?.user);
       return true;
     } catch (error) {
       console.log(error);

@@ -41,11 +41,11 @@ export class UsersController {
   findOneByEmail(@Param('email') email: string) {
     return this.usersService.findOneByEmail(email);
   }
-  @Roles(RoleType.MANAGER, RoleType.EMPLOYEE,RoleType.ADMIN)
-  @Get('/orders/:id')
-  findUserOrders(@Param('id') id: string) {
-    return this.usersService.findUserOrders(id);
-  }
+  // @Roles(RoleType.MANAGER, RoleType.EMPLOYEE,RoleType.ADMIN)
+  // @Get('/orders/:id')
+  // findUserOrders(@Param('id') id: string) {
+  //   return this.usersService.findUserOrders(id);
+  // }
   
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

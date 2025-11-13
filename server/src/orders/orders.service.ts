@@ -44,7 +44,6 @@ export class OrdersService {
       relations: {
         businessLocationId: true,
         tableId: true,
-        userId: true,
       },
     });
   }

@@ -1,0 +1,51 @@
+@import "../../styles/colors.scss";
+
+.staff-wrapper {
+  height: calc(100% - 80px);
+  width: calc(100% - 40px - 32px);
+  background-color: $background-content-color;
+  margin: 32px;
+  .header-wrapper {
+    padding: 0;
+    .header-counter {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      h4 {
+        font-size: 20px;
+        padding-left: 24px;
+      }
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+        color: $primary-color;
+        background-color: $thirdly-color;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  .staff-menu {
+    list-style: none;
+    display: flex;
+    height: 40px;
+    width: 100%;
+    .active-tab{
+      border-bottom: 1px solid $secondary-color;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1px 24px;
+    }
+    li:hover {
+      background-color: $thirdly-color;
+    }
+  }
+}

@@ -10,6 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { DuplicateCodes } from 'src/duplicateCodes';
+import { userRole } from './enum/user.enum';
 
 @Injectable()
 export class UsersService {
@@ -21,9 +22,9 @@ export class UsersService {
         throw new BadRequestException('User with this email already exists');
       const newUser = await this.usersRepo.save({
         ...createData,
-        roles: createData.roles?.map((id) => ({ id })),
-        shift: createData.shift?.map((id) => ({ id })),
-        order: createData.order?.map((id) => ({ id })),
+        roles: createData.roles
+          ? createData.roles.map((r) => userRole[r as keyof typeof userRole])
+          : [userRole.EMPLOYEE],
       });
       return newUser;
     } catch (error) {
@@ -36,32 +37,27 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.usersRepo.find({
-      relations: {
-        roles: true,
-        shift: true,
-      },
-    });
+    return await this.usersRepo.find({});
   }
   async findOneByEmail(email: string) {
     return this.usersRepo.findOneBy({ email });
   }
-  async findOneByEmailWithRoles(email: string) {
-    return this.usersRepo.findOne({
-      where: { email },
-      relations: {
-        roles: true
-      }
-    });
-  }
-  async findOneWithRoles(id: string) {
-    return this.usersRepo.findOne({
-      where: { id },
-      relations: {
-        roles: true
-      }
-    });
-  }
+  // async findOneByEmailWithRoles(email: string) {
+  //   return this.usersRepo.findOne({
+  //     where: { email },
+  //     relations: {
+  //       roles: true
+  //     }
+  //   });
+  // }
+  // async findOneWithRoles(id: string) {
+  //   return this.usersRepo.findOne({
+  //     where: { id },
+  //     relations: {
+  //       roles: true
+  //     }
+  //   });
+  // }
   async findOne(id: string) {
     try {
       const foundUser = await this.usersRepo.findOneByOrFail({ id });
@@ -70,23 +66,23 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
   }
-  async findUserOrders(id: string) {
-    return await this.usersRepo.find({
-      where: { id },
-      relations: {
-        order: true,
-      },
-    });
-  }
+  // async findUserOrders(id: string) {
+  //   return await this.usersRepo.find({
+  //     where: { id },
+  //     relations: {
+  //       order: true,
+  //     },
+  //   });
+  // }
   async update(id: string, data: UpdateUserDto) {
     try {
       const foundUser = await this.findOne(id);
       Object.assign(foundUser, data);
       await this.usersRepo.save({
         ...data,
-        roles: data.roles?.map((id) => ({ id })),
-        shift: data.shift?.map((id) => ({ id })),
-        order: data.order?.map((id) => ({ id })),
+        roles: data.roles
+          ? data.roles.map((r) => userRole[r as keyof typeof userRole])
+          : [userRole.EMPLOYEE],
       });
     } catch (error) {
       if (error.code === DuplicateCodes.DUPLICATE_PG_CODE)

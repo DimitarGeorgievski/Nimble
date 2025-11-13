@@ -1,0 +1,12 @@
+@import '../../styles/colors.scss';
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  .content {
+    display: flex;
+    .page-content{
+      width: 100%;
+      background-color: $background-border-color;
+    }
+  }
+}

@@ -39,7 +39,8 @@
         font-family: "Manrope", sans-serif;
         border: none;
         outline: none;
-        color: $border-color;
+
+        width: 100%;
       }
       input::placeholder {
         color: $border-color;

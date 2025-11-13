@@ -5,6 +5,8 @@ import { ErrorPage } from "./Pages/Error/Error";
 import { tokenService } from "./services/tokenService";
 import { ProtectedRoute } from "./Pages/ProtectedRoute/ProtectedRoute";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
+import { Staff } from "./Pages/Staff/Staff";
+import { MainLayout } from "./Pages/MainLayout/MainLayout";
 
 function App() {
   return (
@@ -20,7 +22,10 @@ function App() {
         }
       />
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<MainLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/staff" element={<Staff />} />
+        </Route>
       </Route>
       <Route
         path="/"

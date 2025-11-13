@@ -1,3 +1,4 @@
+import { Staff } from "src/staff/entities/staff.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -23,6 +24,6 @@ export class Role {
         name: "updated_at"
     })
     updatedAt: Date;
-    @ManyToMany(() => User, user => user.roles)
-    users: User[]
+    @ManyToMany(() => Staff, user => user.roles)
+    staff: Staff[]
 }

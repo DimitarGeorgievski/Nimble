@@ -34,11 +34,7 @@ export class RolesService {
   }
 
   async findAll() {
-    return await this.roleRepo.find({
-      relations: {
-        users: true,
-      },
-    });
+    return await this.roleRepo.find({});
   }
   async findRoleByName(name: string) {
     return this.roleRepo.findOne({

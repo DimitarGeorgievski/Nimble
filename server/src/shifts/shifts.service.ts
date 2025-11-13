@@ -40,7 +40,6 @@ export class ShiftsService {
     return await this.shiftRepo.find({
       relations: {
         businessLocationId: true,
-        userId: true,
       },
     });
   }
@@ -57,7 +56,6 @@ export class ShiftsService {
         where: { id },
         relations: {
           businessLocationId: true,
-          userId: true,
         },
       });
       return foundShift;
@@ -72,7 +70,7 @@ export class ShiftsService {
         where: { id },
         relations: ['userId', 'businessLocationId'],
       });
-      if (!foundShift) throw new NotFoundException('Table not found');
+      if (!foundShift) throw new NotFoundException('Shift not found');
       Object.assign(foundShift, {
         ...data,
         id,
