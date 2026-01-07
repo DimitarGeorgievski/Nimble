@@ -1,5 +1,6 @@
 import { IsEnum, IsString, Length } from "class-validator";
 import { userStatus } from "src/users/enum/user.enum";
+import { staffGender } from "../enums/staff.enum";
 
 export class CreateStaffDto {
   @IsString()
@@ -18,4 +19,6 @@ export class CreateStaffDto {
   @IsString()
   @Length(0,30)
   color: string;
+  @IsEnum(staffGender)
+  gender: staffGender;
 }

@@ -16,7 +16,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           database: configService.get('DB_NAME'),
           synchronize: configService.get('ENVIRONMENT') === 'DEV',
           autoLoadEntities: true,
-          logger: 'formatted-console',
         };
       },
     }),

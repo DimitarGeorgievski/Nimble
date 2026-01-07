@@ -16,6 +16,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { staffGender } from '../enums/staff.enum';
 
 @Entity()
 export class Staff {
@@ -36,6 +37,8 @@ export class Staff {
     unique: true,
   })
   email: string;
+  @Column({ enum: staffGender })
+  gender: staffGender;
   @Column({
     length: 20,
     unique: true,

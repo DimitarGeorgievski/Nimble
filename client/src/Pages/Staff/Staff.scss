@@ -38,13 +38,14 @@
     .active-tab{
       border-bottom: 1px solid $secondary-color;
     }
-    li {
+    .staff-tabs {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1px 24px;
     }
-    li:hover {
+    .staff-tabs:hover {
+      cursor: pointer;
       background-color: $thirdly-color;
     }
   }
